@@ -181,7 +181,19 @@ function FormSplitBill({ selectedFriend, onSplitBill }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!bill || !userExpense) return;
+    if (!bill) {
+      alert("There's no bill to split");
+      return;
+    }
+    if (!userExpense) {
+      if (userExpense === 0) {
+        alert("You/your friend paid the bill fully, no splitting happens");
+        return;
+      }
+      alert("Please inform the app your expense");
+      return;
+    }
+
     onSplitBill(payer === "user" ? friendExpense : -userExpense);
   }
 
